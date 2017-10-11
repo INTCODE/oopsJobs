@@ -86,4 +86,4 @@ hwi_oauth:
             type:                google
             client_id:           '%hwi_google_client_id%'
             client_secret:       '%hwi_google_client_secret%'
-            scope:               "email profile"
+            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
