@@ -41,30 +41,47 @@ class FOSUBUserProvider extends BaseClass
         $email = $response->getEmail();
         $user = $this->userManager->findUserBy(array('email' => $email));
 
-        if (null === $user) {
+        //new user
+        if ($user === null) {
             $service = $response->getResourceOwner()->getName();
             $setter = 'set'.ucfirst($service);
             $setter_id = $setter.'Id';
             $setter_token = $setter.'AccessToken';
-
+            // create new user here
             $user = $this->userManager->createUser();
             $user->$setter_id($username);
             $user->$setter_token($response->getAccessToken());
-
-            $user->setUsername($username);
-            $user->setEmail($username);
-            $user->setPassword($username);
+            $user->setUsername($email);
+            $user->setEmail($email);
+            $user->setPassword('');
             $user->setEnabled(true);
+            $this->userManager->updateUser($user);
+            
+            return $user;
+        }
+        
+        //user exist with another social account
+        if($user->getPassword() == '')
+        {
+            $service = $response->getResourceOwner()->getName();
+            $setter = 'set'.ucfirst($service);
+            $setter_id = $setter.'Id';
+            $setter_token = $setter.'AccessToken';
+            $user->$setter_id($username);
+            $user->$setter_token($response->getAccessToken());
             $this->userManager->updateUser($user);
             return $user;
         }
-
-        $user = parent::loadUserByOAuthUserResponse($response);
-        $serviceName = $response->getResourceOwner()->getName();
-        $setter = 'set' . ucfirst($serviceName) . 'AccessToken';
-
-        $user->$setter($response->getAccessToken());
+        
+        //user exist with normal login
+        $service = $response->getResourceOwner()->getName();
+        $setter = 'set'.ucfirst($service);
+        $setter_id = $setter.'Id';
+        $setter_token = $setter.'AccessToken';
+        $user->$setter_id($username);
+        $user->$setter_token($response->getAccessToken());
+        $user->setEnabled(true);
+        $this->userManager->updateUser($user);
         return $user;
     }
-
 }
