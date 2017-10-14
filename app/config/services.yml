@@ -16,7 +16,7 @@ services:
         tags: ['controller.service_arguments']
 
     my.oauth_aware.user_provider.service:
-        class: UserBundle\Security\Core\User\FOSUBUserProvider
+        class: AppBundle\Security\FOSUBUserProvider
         arguments:
             - '@fos_user.user_manager'
             - {google: google_id}
