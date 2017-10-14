@@ -38,7 +38,8 @@ class FOSUBUserProvider extends BaseClass
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $username = $response->getUsername();
-        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+        $email = $response->getEmail();
+        $user = $this->userManager->findUserBy(array('email' => $email));
 
         if (null === $user) {
             $service = $response->getResourceOwner()->getName();
