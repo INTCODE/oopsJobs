@@ -19,3 +19,6 @@ hwi_oauth_login:
 
 google_login:
     path: /login/check-google
+
+github_login:
+    path: /login/check-github
