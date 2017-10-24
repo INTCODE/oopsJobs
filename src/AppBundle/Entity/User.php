@@ -37,6 +37,16 @@ class User extends BaseUser
      * @ORM\Column(name="github_access_token", type="string", nullable=true)
      */
     protected $githubAccessToken;
+    
+    /**
+     * @ORM\Column(name="linkedin_id", type="string", nullable=true)
+     */
+    protected $linkedinId;
+    
+    /**
+     * @ORM\Column(name="linkedin_access_token", type="string", nullable=true)
+     */
+    protected $linkedinAccessToken;
 
     /**
      * Constructor
@@ -134,5 +144,41 @@ class User extends BaseUser
     function setGithubAccessToken($githubAccessToken)
     {
         $this->githubAccessToken = $githubAccessToken;
+    }
+    
+    /**
+     * Get LinkedIn id
+     * @return string
+     */
+    function getLinkedinId()
+    {
+        return $this->linkedinId;
+    }
+
+    /**
+     * Set LinkedIn id
+     * @param string $linkedinId
+     */
+    function setLinkedinId($linkedinId)
+    {
+        $this->linkedinId = $linkedinId;
+    }
+
+    /**
+     * Get LinkedIn access token
+     * @return string
+     */
+    function getLinkedinAccessToken()
+    {
+        return $this->linkedinAccessToken;
+    }
+
+    /**
+     * Set LinkedIn access token
+     * @param string $linkedinAccessToken
+     */
+    function setLinkedinAccessToken($linkedinAccessToken)
+    {
+        $this->linkedinAccessToken = $linkedinAccessToken;
     }
 }

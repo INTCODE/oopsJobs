@@ -89,12 +89,17 @@ hwi_oauth:
             google: google_id
     resource_owners:
         google:
-            type:                google
-            client_id:           '%hwi_google_client_id%'
-            client_secret:       '%hwi_google_client_secret%'
-            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+            type: google
+            client_id: '%hwi_google_client_id%'
+            client_secret: '%hwi_google_client_secret%'
+            scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
         github:
             type: github
             client_id: '%hwi_github_client_id%'
             client_secret: '%hwi_github_client_secret%'
-            scope: 'user:email,public_repo'  
+            scope: 'user:email,public_repo'
+        linkedin:
+            type: linkedin
+            client_id: '%hwi_linkedin_client_id%'
+            client_secret: '%hwi_linkedin_client_secret%'
+            scope: 'r_fullprofile'
